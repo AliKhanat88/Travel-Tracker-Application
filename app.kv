@@ -1,0 +1,102 @@
+# Create your Kivy layout in the kv language here
+#: import CustomClass main.CustomClass
+#:kivy 2.0.0
+
+BoxLayout:
+    BoxLayout:
+        orientation: "vertical"
+        id: box_left
+        size_hint_x: .25
+        __safe_id: [dropdown.__self__]
+
+        Label:
+            text: "Sort by:"
+
+        Button:
+            id: btn
+            text: 'Press'
+            on_release: dropdown.open(self)
+            size_hint_y: None
+            height: '48dp'
+        
+        Widget: 
+            on_parent: dropdown.dismiss()
+        DropDown:
+            id: dropdown
+            on_select: btn.text = '{}'.format(args[1])
+
+            Button:
+                id: visit_btn
+                text: 'visited'
+                size_hint_y: None
+                height: '48dp'
+                on_release: CustomClass.on_sort(self)
+
+            Button:
+                text: 'name'
+                id: name
+                size_hint_y: None
+                height: '48dp'
+                on_release: CustomClass.on_sort(self)
+
+            Button:
+                text: 'country'
+                id: country
+                size_hint_y: None
+                height: '48dp'
+                on_release: CustomClass.on_sort(self)
+
+            Button:
+                text: 'priority'
+                id: priority
+                size_hint_y: None
+                height: '48dp'
+                on_release: CustomClass.on_sort(self)
+
+        Label:
+            text: "Add New Place..."
+
+        Label:
+            text: "Name"
+
+        TextInput:
+            id: name_input
+
+        Label:
+            text: "Country"
+
+        TextInput:
+            id: country_input
+
+        Label:
+            text: "Priority"   
+
+        TextInput:
+            id: priority_input
+
+        Button:
+            id: add_place_button
+            text: "Add Place"
+            on_release: CustomClass.on_add(self)
+
+        Button:
+            id: clear_button
+            text: "Clear"
+            on_release: CustomClass.on_clear(self)
+
+        
+
+    BoxLayout:
+        orientation: "vertical"
+        id: box:right
+        size_hint_x: .75
+
+        CustomClass:
+            id: custom_class
+            size_hint_y: 0.9
+            orientation: "vertical"
+
+        Label:
+            id: message
+            size_hint_y:0.05
+            text: "Welcome to the travel app"
